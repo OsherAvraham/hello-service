@@ -24,6 +24,9 @@ COPY --from=builder /install /usr/local
 COPY app/ ./app/
 # Now copy your code.
 
+RUN pip uninstall -y pip setuptools
+# The app doesn't install packages at runtime, so remove the installers.
+
 RUN useradd --create-home appuser
 USER appuser
 # Create a normal user and switch to it, so the app doesn't run as root.
