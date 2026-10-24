@@ -9,8 +9,8 @@ jobs:
   test:                       # a job called "test"
     runs-on: ubuntu-latest    # a fresh Linux machine from GitHub
     steps:
-      - uses: actions/checkout@v4        # 1. download your repo onto the machine
-      - uses: actions/setup-python@v5    # 2. install Python...
+      - uses: actions/checkout@v7        # 1. download your repo onto the machine
+      - uses: actions/setup-python@v7    # 2. install Python...
         with:
           python-version: "3.13"         #    ...the same version as your Dockerfile
       - run: pip install -r requirements-dev.txt   # 3. install app + test packages
