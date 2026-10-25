@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-service
+  namespace: argocd                 # Applications live in Argo CD's namespace
+spec:
+  project: default
+  source:                           # WHERE the desired state is
+    repoURL: https://github.com/OsherAvraham/hello-service.git
+    targetRevision: main            # which branch
+    path: deploy/hello-service      # the Helm chart inside the repo
+  destination:                      # WHERE to deploy it
+    server: https://kubernetes.default.svc   # "this same cluster"
+    namespace: hello
+  syncPolicy:
+    automated:                      # sync by itself, no button clicking
+      prune: true                   # delete resources that were removed from Git
+      selfHeal: true                # undo manual changes made in the cluster
+    syncOptions:
